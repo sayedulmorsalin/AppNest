@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Admin Dashboard - AppNest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
@@ -183,10 +183,10 @@
 
     <aside class="sidebar">
         <div class="sidebar-logo">
-            <div class="logo">
+            <a href="../index.html" class="logo">
                 <i class="fas fa-cube"></i>
                 <span style="color: var(--secondary);">AppNest HQ</span>
-            </div>
+            </a>
         </div>
 
         <nav class="sidebar-nav" style="flex-grow: 1;">
@@ -233,26 +233,22 @@
             </div>
         </header>
 
-        <div class="stats-grid">
+        <div id="admin-stats" class="stats-grid">
             <div class="stat-card">
                 <div style="color: var(--text-muted); font-size: 14px;">Total Platform Downloads</div>
-                <div class="stat-value">1,245,892</div>
-                <div style="color: #10b981; font-size: 12px;"><i class="fas fa-caret-up"></i> 24.5% vs Prev Month</div>
+                <div id="global-downloads" class="stat-value">--</div>
             </div>
             <div class="stat-card">
                 <div style="color: var(--text-muted); font-size: 14px;">Monthly Recurring Revenue</div>
-                <div class="stat-value">$142,500</div>
-                <div style="color: #10b981; font-size: 12px;"><i class="fas fa-caret-up"></i> 12.3% vs Prev Month</div>
+                <div id="global-revenue" class="stat-value">--</div>
             </div>
             <div class="stat-card">
                 <div style="color: var(--text-muted); font-size: 14px;">Active Developers</div>
-                <div class="stat-value">3,120</div>
-                <div style="color: #10b981; font-size: 12px;"><i class="fas fa-caret-up"></i> 4.1% vs Prev Month</div>
+                <div id="global-devs" class="stat-value">--</div>
             </div>
             <div class="stat-card">
                 <div style="color: var(--text-muted); font-size: 14px;">New App Submissions</div>
-                <div class="stat-value">148</div>
-                <div style="color: #f59e0b; font-size: 12px;"><i class="fas fa-clock"></i> 32 Pending Review</div>
+                <div id="global-pending" class="stat-value">--</div>
             </div>
         </div>
 
@@ -260,10 +256,6 @@
             <div class="chart-container">
                 <div class="chart-header">
                     <h3 style="font-size: 18px;">Download Growth</h3>
-                    <select style="background: transparent; color: white; border: 1px solid var(--glass-border); padding: 5px; border-radius: 8px;">
-                        <option>Last 6 Months</option>
-                        <option>Last Year</option>
-                    </select>
                 </div>
                 <canvas id="growthChart"></canvas>
             </div>
@@ -278,73 +270,25 @@
         <section class="bottom-grid">
             <div class="content-card">
                 <h3 style="margin-bottom: 20px;">Top Performing Apps</h3>
-                <div class="list-item">
-                    <div class="item-info">
-                        <div class="item-icon" style="color: var(--primary);"><i class="fas fa-gamepad"></i></div>
-                        <div>
-                            <div style="font-weight: 600;">Nova Saga</div>
-                            <div style="font-size: 12px; color: var(--text-muted);">450k Downloads</div>
-                        </div>
-                    </div>
-                    <span class="status-pill pill-success">Top 1</span>
-                </div>
-                <div class="list-item">
-                    <div class="item-info">
-                        <div class="item-icon" style="color: var(--secondary);"><i class="fas fa-heartbeat"></i></div>
-                        <div>
-                            <div style="font-weight: 600;">Zen Sleep</div>
-                            <div style="font-size: 12px; color: var(--text-muted);">380k Downloads</div>
-                        </div>
-                    </div>
-                    <span class="status-pill pill-success">Top 2</span>
-                </div>
-                <div class="list-item">
-                    <div class="item-info">
-                        <div class="item-icon" style="color: var(--accent);"><i class="fas fa-camera"></i></div>
-                        <div>
-                            <div style="font-weight: 600;">Artify AI</div>
-                            <div style="font-size: 12px; color: var(--text-muted);">290k Downloads</div>
-                        </div>
-                    </div>
-                    <span class="status-pill pill-success">Top 3</span>
+                <div id="top-apps-list">
+                    <div style="text-align: center; padding: 20px; color: var(--text-muted);">Fetching leaderboard...</div>
                 </div>
             </div>
 
             <div class="content-card">
                 <h3 style="margin-bottom: 20px;">Recent Submissions</h3>
-                <div class="list-item">
-                    <div class="item-info">
-                        <div class="item-icon"><i class="fas fa-file-invoice"></i></div>
-                        <div>
-                            <div style="font-weight: 600;">Budget Flow</div>
-                            <div style="font-size: 12px; color: var(--text-muted);">by DevStudio Inc.</div>
-                        </div>
-                    </div>
-                    <span class="status-pill pill-warning">Review</span>
-                </div>
-                <div class="list-item">
-                    <div class="item-info">
-                        <div class="item-icon"><i class="fas fa-puzzle-piece"></i></div>
-                        <div>
-                            <div style="font-weight: 600;">Puzzle Quest 3</div>
-                            <div style="font-size: 12px; color: var(--text-muted);">by IndieSpark</div>
-                        </div>
-                    </div>
-                    <span class="status-pill pill-warning">Review</span>
-                </div>
-                <div class="list-item">
-                    <div class="item-info">
-                        <div class="item-icon"><i class="fas fa-music"></i></div>
-                        <div>
-                            <div style="font-weight: 600;">BeatMaker X</div>
-                            <div style="font-size: 12px; color: var(--text-muted);">by SoundWave Labs</div>
-                        </div>
-                    </div>
-                    <button class="cta-button" style="padding: 5px 12px; font-size: 11px;">View</button>
+                <div id="recent-submissions-list">
+                    <div style="text-align: center; padding: 20px; color: var(--text-muted);">Fetching submissions...</div>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="../assets/js/firebase-config.js"></script>
 
     <script>
         // Simple auth check

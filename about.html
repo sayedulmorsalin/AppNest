@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - AppNest</title>
+    <meta name="description" content="Learn more about AppNest - your premium destination for discovering and managing the best applications.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .about-section {
+            max-width: 900px;
+            margin: 60px auto;
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 48px;
+            backdrop-filter: blur(20px);
+        }
+        .about-section h1 { margin-bottom: 24px; font-size: 2.5rem; }
+        .about-section h2 { margin-top: 32px; margin-bottom: 16px; color: var(--primary); }
+        .about-section p { margin-bottom: 20px; color: var(--text-muted); line-height: 1.8; font-size: 1.1rem; }
+        .platform-vision {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+        .vision-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            padding: 24px;
+            border-radius: 16px;
+        }
+        .vision-card i { font-size: 2rem; color: var(--secondary); margin-bottom: 16px; }
+        .vision-card h3 { margin-bottom: 12px; }
+    </style>
+</head>
+<body>
+    <div class="bg-mesh"></div>
+    
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-cube"></i>
+                    <span>AppNest</span>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="legal/privacy.html">Privacy</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="about-section">
+            <h1>About AppNest</h1>
+            <p>Welcome to AppNest, the ultimate digital catalog designed for app enthusiasts, developers, and tech explorers. Founded in 2026, our mission is to simplify the discovery and management of high-quality mobile and desktop applications through a breathtaking, user-centric interface.</p>
+            
+            <h2>Who Runs AppNest?</h2>
+            <p>AppNest is operated by a passionate team of developers led by Sayedul Morsalin. We are dedicated to building a platform that bridges the gap between innovative software creators and users looking for their next productivity boost or gaming experience.</p>
+            
+            <h2>Purpose of the Platform</h2>
+            <p>In an era of cluttered app stores and overwhelming choices, AppNest serves as a curated nest. We filter through thousands of releases to bring you only the most reliable, efficient, and beautifully designed applications. Our platform is built on transparency, quality, and community trust.</p>
+
+            <div class="platform-vision">
+                <div class="vision-card">
+                    <i class="fas fa-search"></i>
+                    <h3>Smart Discovery</h3>
+                    <p>Advanced filtering and categorization to help you find exactly what you need in seconds.</p>
+                </div>
+                <div class="vision-card">
+                    <i class="fas fa-shield-halved"></i>
+                    <h3>Trusted Sources</h3>
+                    <p>We only feature applications that meet our strict security and quality standards.</p>
+                </div>
+                <div class="vision-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Dev Friendly</h3>
+                    <p>A dedicated portal for developers to showcase their hard work to a global audience.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="margin-top: 40px;">
+        <div class="container copyright">
+            <p>&copy; 2026 AppNest. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
