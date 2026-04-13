@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Admin Dashboard - AppNest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --sidebar-width: 260px;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar - Same as Dev but with different accent or icon */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: rgba(10, 15, 28, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--glass-border);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 100;
+        }
+
+        .sidebar-logo {
+            margin-bottom: 40px;
+            padding-left: 10px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: var(--text-muted);
+            border-radius: 12px;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: rgba(236, 72, 153, 0.1);
+            color: #fff;
+        }
+
+        .nav-item.active {
+            background: var(--secondary); /* Pink for Super Admin */
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        }
+
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex-grow: 1;
+            padding: 40px;
+            max-width: calc(100% - var(--sidebar-width));
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            padding: 24px;
+            border-radius: 24px;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            margin: 8px 0;
+            background: linear-gradient(to right, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Charts Section */
+        .charts-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 24px;
+            height: 400px;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        /* Grid for Bottom Lists */
+        .bottom-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .content-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 24px;
+        }
+
+        .list-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .item-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .status-pill {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .pill-success { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .pill-warning { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+
+        @media (max-width: 1200px) {
+            .charts-row { grid-template-columns: 1fr; }
+            .bottom-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-mesh"></div>
+
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo">
+                <i class="fas fa-cube"></i>
+                <span style="color: var(--secondary);">AppNest HQ</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav" style="flex-grow: 1;">
+            <div class="nav-item active">
+                <i class="fas fa-chart-pie"></i>
+                <span>Platform KPIs</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-users-cog"></i>
+                <span>Developers</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-shield-alt"></i>
+                <span>App Approvals</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-money-bill-wave"></i>
+                <span>Revenue Ops</span>
+            </div>
+            <div class="nav-item">
+                <i class="fas fa-database"></i>
+                <span>System Logs</span>
+            </div>
+        </nav>
+
+        <div class="nav-item" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="dashboard-header">
+            <div>
+                <h1 style="font-size: 28px;">Super Admin Dashboard</h1>
+                <p style="color: var(--text-muted);">Platform Health Overview</p>
+            </div>
+            
+            <div style="display: flex; gap: 15px;">
+                <button class="cta-button" style="padding: 10px 20px; font-size: 14px; background: rgba(236, 72, 153, 0.1); border-color: var(--secondary); color: white;">
+                    <i class="fas fa-download"></i> Export Report
+                </button>
+                <div class="user-avatar" style="width: 44px; height: 44px; font-size: 18px; background: var(--secondary);">A</div>
+            </div>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div style="color: var(--text-muted); font-size: 14px;">Total Platform Downloads</div>
+                <div class="stat-value">1,245,892</div>
+                <div style="color: #10b981; font-size: 12px;"><i class="fas fa-caret-up"></i> 24.5% vs Prev Month</div>
+            </div>
+            <div class="stat-card">
+                <div style="color: var(--text-muted); font-size: 14px;">Monthly Recurring Revenue</div>
+                <div class="stat-value">$142,500</div>
+                <div style="color: #10b981; font-size: 12px;"><i class="fas fa-caret-up"></i> 12.3% vs Prev Month</div>
+            </div>
+            <div class="stat-card">
+                <div style="color: var(--text-muted); font-size: 14px;">Active Developers</div>
+                <div class="stat-value">3,120</div>
+                <div style="color: #10b981; font-size: 12px;"><i class="fas fa-caret-up"></i> 4.1% vs Prev Month</div>
+            </div>
+            <div class="stat-card">
+                <div style="color: var(--text-muted); font-size: 14px;">New App Submissions</div>
+                <div class="stat-value">148</div>
+                <div style="color: #f59e0b; font-size: 12px;"><i class="fas fa-clock"></i> 32 Pending Review</div>
+            </div>
+        </div>
+
+        <section class="charts-row">
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 style="font-size: 18px;">Download Growth</h3>
+                    <select style="background: transparent; color: white; border: 1px solid var(--glass-border); padding: 5px; border-radius: 8px;">
+                        <option>Last 6 Months</option>
+                        <option>Last Year</option>
+                    </select>
+                </div>
+                <canvas id="growthChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h3 style="font-size: 18px;">Traffic by Platform</h3>
+                </div>
+                <canvas id="platformChart"></canvas>
+            </div>
+        </section>
+
+        <section class="bottom-grid">
+            <div class="content-card">
+                <h3 style="margin-bottom: 20px;">Top Performing Apps</h3>
+                <div class="list-item">
+                    <div class="item-info">
+                        <div class="item-icon" style="color: var(--primary);"><i class="fas fa-gamepad"></i></div>
+                        <div>
+                            <div style="font-weight: 600;">Nova Saga</div>
+                            <div style="font-size: 12px; color: var(--text-muted);">450k Downloads</div>
+                        </div>
+                    </div>
+                    <span class="status-pill pill-success">Top 1</span>
+                </div>
+                <div class="list-item">
+                    <div class="item-info">
+                        <div class="item-icon" style="color: var(--secondary);"><i class="fas fa-heartbeat"></i></div>
+                        <div>
+                            <div style="font-weight: 600;">Zen Sleep</div>
+                            <div style="font-size: 12px; color: var(--text-muted);">380k Downloads</div>
+                        </div>
+                    </div>
+                    <span class="status-pill pill-success">Top 2</span>
+                </div>
+                <div class="list-item">
+                    <div class="item-info">
+                        <div class="item-icon" style="color: var(--accent);"><i class="fas fa-camera"></i></div>
+                        <div>
+                            <div style="font-weight: 600;">Artify AI</div>
+                            <div style="font-size: 12px; color: var(--text-muted);">290k Downloads</div>
+                        </div>
+                    </div>
+                    <span class="status-pill pill-success">Top 3</span>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h3 style="margin-bottom: 20px;">Recent Submissions</h3>
+                <div class="list-item">
+                    <div class="item-info">
+                        <div class="item-icon"><i class="fas fa-file-invoice"></i></div>
+                        <div>
+                            <div style="font-weight: 600;">Budget Flow</div>
+                            <div style="font-size: 12px; color: var(--text-muted);">by DevStudio Inc.</div>
+                        </div>
+                    </div>
+                    <span class="status-pill pill-warning">Review</span>
+                </div>
+                <div class="list-item">
+                    <div class="item-info">
+                        <div class="item-icon"><i class="fas fa-puzzle-piece"></i></div>
+                        <div>
+                            <div style="font-weight: 600;">Puzzle Quest 3</div>
+                            <div style="font-size: 12px; color: var(--text-muted);">by IndieSpark</div>
+                        </div>
+                    </div>
+                    <span class="status-pill pill-warning">Review</span>
+                </div>
+                <div class="list-item">
+                    <div class="item-info">
+                        <div class="item-icon"><i class="fas fa-music"></i></div>
+                        <div>
+                            <div style="font-weight: 600;">BeatMaker X</div>
+                            <div style="font-size: 12px; color: var(--text-muted);">by SoundWave Labs</div>
+                        </div>
+                    </div>
+                    <button class="cta-button" style="padding: 5px 12px; font-size: 11px;">View</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Simple auth check
+        if(localStorage.getItem('appnest_logged_in') !== 'true' || localStorage.getItem('appnest_user_role') !== 'admin') {
+            window.location.href = 'login.html';
+        }
+
+        function logout() {
+            localStorage.removeItem('appnest_logged_in');
+            localStorage.removeItem('appnest_user_role');
+            window.location.href = 'login.html';
+        }
+
+        // Charts Initialization
+        const ctxGrowth = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctxGrowth, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Downloads',
+                    data: [120000, 190000, 300000, 500000, 800000, 1200000],
+                    borderColor: '#ec4899',
+                    backgroundColor: 'rgba(236, 72, 153, 0.1)',
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+                    x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
+                }
+            }
+        });
+
+        const ctxPlatform = document.getElementById('platformChart').getContext('2d');
+        new Chart(ctxPlatform, {
+            type: 'doughnut',
+            data: {
+                labels: ['iOS', 'Android', 'Web', 'Desktop'],
+                datasets: [{
+                    data: [45, 35, 12, 8],
+                    backgroundColor: ['#6366f1', '#ec4899', '#06b6d4', '#f59e0b'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#94a3b8', padding: 20 }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

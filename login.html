@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AppNest Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .login-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 32px;
+            padding: 48px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: var(--glass-shadow);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .login-header .logo {
+            justify-content: center;
+            margin-bottom: 16px;
+            font-size: 32px;
+        }
+
+        .login-header h2 {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .login-header p {
+            color: var(--text-muted);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 14px 14px 14px 48px;
+            color: #fff;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .login-footer {
+            margin-top: 32px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .login-footer a {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .role-switch {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .role-option {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            color: var(--text-muted);
+        }
+
+        .role-option.active {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-mesh"></div>
+
+    <div class="login-section">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo">
+                    <i class="fas fa-cube"></i>
+                    <span>AppNest</span>
+                </div>
+                <h2>Welcome Back</h2>
+                <p>Login to your portal</p>
+            </div>
+
+            <div class="role-switch">
+                <div class="role-option active" onclick="setRole('dev')">Developer</div>
+                <div class="role-option" onclick="setRole('admin')">Super Admin</div>
+            </div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" placeholder="name@company.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="cta-button login-btn">Sign In</button>
+            </form>
+
+            <div class="login-footer">
+                <p>New developer? <a href="#">Create an account</a></p>
+                <p style="margin-top: 10px; font-size: 12px; opacity: 0.7;">
+                    Demo Hint: Use any credentials to login.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedRole = 'dev';
+
+        function setRole(role) {
+            selectedRole = role;
+            document.querySelectorAll('.role-option').forEach(opt => {
+                opt.classList.remove('active');
+                if(opt.innerText.toLowerCase().includes(role)) {
+                    opt.classList.add('active');
+                }
+            });
+            
+            const headerP = document.querySelector('.login-header p');
+            headerP.innerText = role === 'dev' ? 'Login to your Developer portal' : 'Login to Super Admin portal';
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Store session and redirect
+            localStorage.setItem('appnest_user_role', selectedRole);
+            localStorage.setItem('appnest_logged_in', 'true');
+            
+            if(selectedRole === 'dev') {
+                window.location.href = 'dev-dashboard.html';
+            } else {
+                window.location.href = 'admin-dashboard.html';
+            }
+        });
+    </script>
+</body>
+</html>

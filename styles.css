@@ -133,6 +133,27 @@ header {
     width: 100%;
 }
 
+.nav-login-btn {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 16px !important;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff !important;
+}
+
+.nav-login-btn:hover {
+    background: var(--primary) !important;
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.nav-login-btn::after {
+    display: none !important;
+}
+
 .search-bar {
     display: flex;
     align-items: center;
