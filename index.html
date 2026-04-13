@@ -6,8 +6,15 @@
     <title>AppNest - Discover & Download Amazing Apps</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Google AdSense Auto-ads & verification Script -->
+    <!-- Replace 'ca-pub-XXXXXXXXXXXXXXXX' with your actual Publisher ID -->
+    <!-- Remove this if you don't use Auto Ads or want to load scripts later -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 </head>
 <body>
+    <div class="bg-mesh"></div>
+    
     <!-- Header -->
     <header>
         <div class="container">
@@ -18,11 +25,11 @@
                 </div>
                 
                 <div class="nav-links">
-                    <a href="index.html">Home</a>
-                    <a href="#">Categories</a>
-                    <a href="#">Featured</a>
-                    <a href="#">Trending</a>
-                    <a href="#">Developers</a>
+                    <a href="index.html" class="active">Home</a>
+                    <a href="#categories">Categories</a>
+                    <a href="#featured">Featured</a>
+                    <a href="#trending">Trending</a>
+                    <a href="#developers">Developers</a>
                 </div>
                 
                 <div class="search-bar">
@@ -41,17 +48,62 @@
     <section class="hero">
         <div class="container">
             <h1>Discover Amazing Apps</h1>
-            <p>AppNest is your one-stop destination to explore, download, and manage all your favorite mobile and desktop applications in one place.</p>
+            <p>AppNest is your one-stop destination to explore, download, and manage all your favorite mobile and desktop applications in one breathtaking place.</p>
+            <a href="#featured" class="cta-button">Explore Collection</a>
+        </div>
+    </section>
+
+    <!-- Advertisement Section (Top) -->
+    <section class="container ad-section">
+        <label class="ad-label">Advertisement</label>
+        <div class="ad-container">
+            <!-- Google AdSense Ad Unit -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="container glass-container">
+        <h2 class="section-title">Explore Categories</h2>
+        <div class="categories">
+            <div class="category-card">
+                <i class="fas fa-gamepad"></i>
+                <h3>Games</h3>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-camera"></i>
+                <h3>Photography</h3>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Productivity</h3>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-headphones"></i>
+                <h3>Music</h3>
+            </div>
+            <div class="category-card">
+                <i class="fas fa-heartbeat"></i>
+                <h3>Health</h3>
+            </div>
         </div>
     </section>
 
     <!-- Featured Apps Section -->
-    <section class="container featured-apps">
-        <h2 class="section-title">Featured Apps</h2>
+    <section id="featured" class="container glass-container">
+        <h2 class="section-title">Featured Picks</h2>
         <div class="apps-grid">
             <div class="app-card">
                 <div class="app-image">
-                    <img src="assets/user_icon.png" alt="DADU App">
+                    <img src="assets/user_icon.png" alt="DADU App" onerror="this.src='https://via.placeholder.com/150/0f172a/6366f1?text=App'">
                 </div>
                 <div class="app-info">
                     <h3>DADU</h3>
@@ -62,10 +114,77 @@
                         </span>
                         <span>50 MB</span>
                     </div>
-                    <a href="https://play.google.com/store/apps/details?id=com.sayedulmarsalin.dadu" class="download-btn">Download</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.sayedulmarsalin.dadu" class="download-btn">Download Now</a>
                 </div>
             </div>
-            <!-- Add more app cards as needed -->
+            
+            <div class="app-card">
+                <div class="app-image">
+                    <img src="https://via.placeholder.com/150/0f172a/ec4899?text=Artify">
+                </div>
+                <div class="app-info">
+                    <h3>Artify AI</h3>
+                    <p>Transform your photos into digital art with NextGen AI</p>
+                    <div class="app-meta">
+                        <span class="app-rating">
+                            <i class="fas fa-star"></i> 4.9
+                        </span>
+                        <span>120 MB</span>
+                    </div>
+                    <a href="#" class="download-btn">Download Now</a>
+                </div>
+            </div>
+
+            <div class="app-card">
+                <div class="app-image">
+                    <img src="https://via.placeholder.com/150/0f172a/06b6d4?text=Flow">
+                </div>
+                <div class="app-info">
+                    <h3>Flow Planner</h3>
+                    <p>The ultimate productivity and habit tracking system</p>
+                    <div class="app-meta">
+                        <span class="app-rating">
+                            <i class="fas fa-star"></i> 4.7
+                        </span>
+                        <span>35 MB</span>
+                    </div>
+                    <a href="#" class="download-btn">Download Now</a>
+                </div>
+            </div>
+            
+            <div class="app-card">
+                <div class="app-image">
+                    <img src="https://via.placeholder.com/150/0f172a/10b981?text=Zen">
+                </div>
+                <div class="app-info">
+                    <h3>Zen Space</h3>
+                    <p>Guided meditations and relaxing sleep sounds</p>
+                    <div class="app-meta">
+                        <span class="app-rating">
+                            <i class="fas fa-star"></i> 4.6
+                        </span>
+                        <span>75 MB</span>
+                    </div>
+                    <a href="#" class="download-btn">Download Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advertisement Section (Bottom) -->
+    <section class="container ad-section">
+        <label class="ad-label">Advertisement</label>
+        <div class="ad-container">
+            <!-- Google AdSense Ad Unit -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
     </section>
 
@@ -75,7 +194,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>AppNest</h3>
-                    <p>Your trusted platform for discovering and downloading amazing applications for all your devices.</p>
+                    <p>Your premium destination for discovering and downloading amazing applications across all your devices.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -88,9 +207,9 @@
                     <h3>Explore</h3>
                     <ul class="footer-links">
                         <li><a href="#">Home</a></li>
-                        <li><a href="#">Categories</a></li>
-                        <li><a href="#">Featured Apps</a></li>
-                        <li><a href="#">Trending Apps</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#featured">Featured Apps</a></li>
+                        <li><a href="#trending">Trending Apps</a></li>
                         <li><a href="#">New Releases</a></li>
                     </ul>
                 </div>
@@ -119,7 +238,7 @@
             </div>
             
             <div class="copyright">
-                <p>&copy; 2023 AppNest. All rights reserved.</p>
+                <p>&copy; 2026 AppNest. All rights reserved.</p>
             </div>
         </div>
     </footer>
