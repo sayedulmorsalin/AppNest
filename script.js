@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
-        <a href="privacy-policy.html">Privacy</a>
-        <a href="login.html">Developer Portal</a>
+        <a href="legal/privacy.html">Privacy</a>
+        <a href="dashboard/login.html">Developer Portal</a>
     `;
     document.body.appendChild(mobileNav);
 
